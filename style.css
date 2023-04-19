@@ -216,8 +216,10 @@ border: none;
   .pr{
     font-size: 22px;
   }
-  .btn{
+   .btn{
     padding: 10px 20px;
+    margin-bottom: 10px;
+    margin-left: 0;
   }
   .btn2{
     margin-right: 0px;
