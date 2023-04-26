@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plagarism Checker</title>
 </head>
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.7.570/build/pdf.min.js">
+</script>
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 <body>
@@ -31,14 +33,19 @@
                 <p class="yr-doc">document for errors and plagiarism</p>
             </div>
             <div>
-                <textarea class="Textarea" name="" id="textArea" cols="80" rows="30" placeholder="Copy and Paste your text here to detect plagiarised content"></textarea>
+                <textarea class="Textarea" name="" id="textArea" cols="80" rows="30" placeholder="Copy and Paste your text here to detect plagiarised content" ></textarea>
             </div>
             <button class="btn">Browse</button>
             <input type="file" class="hid"id="fileInput" hidden>
-            <button class="btn2" onclick="checkPlagiarism">Check Plagiarism</button>
+            <button class="btn2" id="plagBtn"onclick="checkPlagiarism">Check Plagiarism</button>
+            <section class="progress-area">
+
+                
+            </section>
         </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
