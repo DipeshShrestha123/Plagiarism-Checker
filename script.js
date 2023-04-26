@@ -15,9 +15,18 @@ input.addEventListener('change', function() {
   reader.onload = function() {
     let text = "";
     if (fileName.endsWith(".txt")) {
-      // If the file is a text file, use the contents as is
-      text = reader.result;
-    } else if (fileName.endsWith(".pdf")) {
+      // use a FileReader to read the contents of the file
+      let reader = new FileReader();
+      reader.readAsText(file);
+      reader.onload = () => {
+        // get the contents of the file
+        let fileContent = reader.result;
+  
+        // display the file contents in the textarea
+        let textarea = document.getElementById('textArea');
+        textarea.value = fileContent;
+      };
+    }  else if (fileName.endsWith(".pdf")) {
       // If the file is a PDF, convert it to text using pdf.js
       let loadingTask = pdfjsLib.getDocument(reader.result);
       loadingTask.promise.then(function(pdf) {
@@ -32,7 +41,7 @@ input.addEventListener('change', function() {
       });
     } // check if the file is a DOCX file
     else if (fileName.endsWith('.docx')) {
-    console.log("its Docx FIle");
+          console.log("its docx file");
       // use Mammoth to convert the DOCX file to HTML
       mammoth.convertToHtml({arrayBuffer: file}).then((result) => {
         // get the HTML content from the result
