@@ -41,18 +41,8 @@ input.addEventListener('change', function() {
       });
     } // check if the file is a DOCX file
     else if (fileName.endsWith('.docx')) {
-          console.log("its docx file");
-      // use Mammoth to convert the DOCX file to HTML
-      mammoth.convertToHtml({arrayBuffer: file}).then((result) => {
-        // get the HTML content from the result
-        let htmlContent = result.value;
-  
-        // display the HTML content in the textarea
-        let textarea = document.getElementById('textArea');
-        textarea.value = htmlContent;
-      });
-    }
-    else {
+      handleFileSelect(reader);
+    } else {
       alert("Please upload a text, PDF or Word (.docx) file.");
     }
   };
@@ -61,3 +51,47 @@ input.addEventListener('change', function() {
     reader.readAsArrayBuffer(file);
   }
 });
+
+function handleFileSelect(reader) {
+  readFileInputEventAsArrayBuffer(reader, function(arrayBuffer) {
+      mammoth.convertToHtml({arrayBuffer: arrayBuffer})
+          .then(displayResult, function(error) {
+              console.error(error);
+          });
+  });
+}
+
+function displayResult(result) {
+  // filter out any images in the HTML result
+  var htmlContent = result.value.replace(/<img[^>]*>/g, "");
+
+  // remove all html tags from the filtered HTML content
+  var div = document.createElement("div");
+  div.innerHTML = htmlContent;
+  var textContent = div.textContent || div.innerText || "";
+  var plainText = textContent.trim();
+
+  // format the output text
+  var formattedText = plainText.replace(/\n/g, "\n\n").replace(/\s\s+/g, " ");
+
+  // write the formatted text to the textarea
+  document.getElementById("textArea").innerHTML = formattedText;
+
+  var messageHtml = result.messages.map(function(message) {
+      return '<li class="' + message.type + '">' + escapeHtml(message.message) + "</li>";
+  }).join("");
+
+}
+
+function readFileInputEventAsArrayBuffer(reader, callback) {
+  var arrayBuffer = reader.result;
+  callback(arrayBuffer);
+}
+
+function escapeHtml(value) {
+  return value
+      .replace(/&/g, '&amp;')
+      .replace(/"/g, '&quot;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+}
