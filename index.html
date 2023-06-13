@@ -4,19 +4,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plagarism Checker</title>
+    <title>Plagarism checker</title>
 </head>
 <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.7.570/build/pdf.min.js">
 </script>
 <script src="mammoth.browser.js"></script>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="./CSS/style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 <body>
+    <div id="preloader" class="load">
+        <div class="loader"></div>
+      </div>      
     <div class="container">
         <div class="main-container">
 
             <div class="nav">
-                <img src="plagiarism.svg" alt="logo">
+                <img src="plagiarism.svg" alt="logo" class="logo">
                 <h1 class="logo-head">Checker</h1>
             </div>
 
@@ -38,7 +41,7 @@
             </div>
             <button class="btn">Browse</button>
             <input type="file" class="hid"id="fileInput" hidden>
-            <button class="btn2" id="plagBtn"onclick="checkPlagiarism">Check Plagiarism</button>
+            <button class="btn2" id="plagBtn"">Check Plagiarism</button>
             <section class="progress-area">
 
                 
@@ -46,6 +49,7 @@
         </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
