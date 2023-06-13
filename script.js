@@ -86,3 +86,7 @@ function escapeHtml(value) {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;');
 }
+plag.onclick = () => {
+ alert("U have to add Plagairism algorithm in code")
+};
+
